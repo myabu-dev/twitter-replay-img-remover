@@ -2,7 +2,7 @@
   "name": "Twitter Replay Image and GIF Remover",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Remove replay only have Image or GIF",
+  "description": "Remove replay Image and GIF. If do not have text remove replay.",
   "content_scripts": [{
     "matches": ["*://twitter.com/*"],
     "js": [
