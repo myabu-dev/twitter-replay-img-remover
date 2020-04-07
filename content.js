@@ -1,6 +1,20 @@
 const TIMEOUT_DULATION = 300;
 const targetItems = new Map();
 
+const LANGUAGE = (window.navigator.languages && window.navigator.languages[0]) ||
+  window.navigator.language ||
+  window.navigator.userLanguage ||
+  window.navigator.browserLanguage;
+
+function isJapanese(){
+  return (LANGUAGE.indexOf('ja') !== -1)
+}
+  
+const Text = {
+  'showBtn' : isJapanese()? 'リプライを表示' : 'Show Replay',
+  'hideBtn' : isJapanese()? 'リプライを非表示' : 'Hide Replay'
+}
+
 let tweetUser;
 
 chrome.runtime.onMessage.addListener(function(message) {
@@ -13,7 +27,8 @@ chrome.runtime.onMessage.addListener(function(message) {
     if(targetItems.size >= 2000){ //とりあえず2000件以上あればクリア
       targetItems.clear();
     }
-    
+
+    console.log(isJapanese())
     const pattarn =/https:\/\/twitter\.com\/(.+)\/status\/[0-9]+/;
     tweetUser = location.href.match(pattarn)[1];
 
@@ -80,7 +95,7 @@ function deleteReplay(elm, btnElm=null){
 
   targetItems.set(tweet, true);
 
-  btnElm.innerHTML = "show replay";
+  btnElm.innerHTML = Text.hideBtn;
   btnElm.onclick = recoverReplay.bind(null, elm, btnElm);
   elm.parentNode.append(btnElm);
 
@@ -89,7 +104,7 @@ function deleteReplay(elm, btnElm=null){
 
 function reDeleteReplay(elm, btnElm){
   elm.style.display = "none";
-  btnElm.innerHTML = 'show replay'
+  btnElm.innerHTML = Text.hideBtn;
   btnElm.onclick = recoverReplay.bind(null, elm, btnElm);
 }
 
@@ -100,7 +115,7 @@ function recoverReplay(elm, btnElm){
   targetItems.set(tweet, false);
 
   elm.style.display = "block";
-  btnElm.innerHTML = 'hide replay'
+  btnElm.innerHTML = Text.showBtn;
 
   btnElm.onclick = reDeleteReplay.bind(null, elm, btnElm)
   setObserver()
