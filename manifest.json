@@ -9,14 +9,14 @@
   "content_scripts": [{
     "matches": ["*://twitter.com/*"],
     "js": [
-      "content.js"
+      "js/content.js"
     ],
-    "css": ["content.css"]
+    "css": ["css/content.css"]
   }],
   "background": {
   "persistent": false,
     "scripts": [
-      "background.js"
+      "js/background.js"
     ]
   },
   "permissions": [
