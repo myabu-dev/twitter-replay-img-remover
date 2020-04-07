@@ -15,7 +15,6 @@ document.getElementById('toggle-emoticon-label').innerHTML = Text.emoticonLabel;
 const emoticonSwitch = document.getElementById('toggle-emoticon-checkbox');
 
 chrome.storage.local.get(["emoticonFlg"], function (result) {
-  console.log(result.emoticonFlg)
   if(Object.keys(result).length){
     emoticonSwitch.checked = result.emoticonFlg;
   }else{
@@ -30,15 +29,12 @@ function emoticonSwitchChange(){
   const emoticonSwitchFlag = emoticonSwitch.checked;
 
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
-    console.log(tabs)
     chrome.tabs.sendMessage(tabs[0].id, {
       type: "emotionFlagChange"
     });
   });
 
-  chrome.storage.local.set({'emoticonFlg': emoticonSwitchFlag}, function () {
-    console.log(emoticonSwitchFlag)
-  });
+  chrome.storage.local.set({'emoticonFlg': emoticonSwitchFlag});
 }
 
 

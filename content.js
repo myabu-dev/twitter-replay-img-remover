@@ -49,7 +49,6 @@ chrome.runtime.onMessage.addListener(function(message) {
       targetItems.clear();
     }
 
-    console.log(isJapanese())
     const pattarn =/https:\/\/twitter\.com\/(.+)\/status\/[0-9]+/;
     tweetUser = location.href.match(pattarn)[1];
 
