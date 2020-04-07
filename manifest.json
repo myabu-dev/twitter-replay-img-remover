@@ -2,7 +2,8 @@
   "name": "Twitter Replay Image and GIF Remover",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Remove replay Image and GIF. If do not have text remove replay. And can remove reply only use emoticon",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
   "icons": {
     "128": "icon.png"
   },
