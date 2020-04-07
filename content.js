@@ -17,13 +17,31 @@ const Text = {
   'showBtn' : isJapanese()? 'リプライを非表示' : 'Hide Replay'
 }
 
-
 let tweetUser;
+
+let emotionFlag;
+chrome.storage.local.get(["emoticonFlg"], function (result) {
+  if(Object.keys(result).length){
+    emotionFlag= result.emoticonFlg;
+  }else{
+    emotionFlag = false;
+  }
+});
 
 chrome.runtime.onMessage.addListener(function(message) {
 
   if(targetItems.size >= 1000){ //とりあえず1000件以上あればクリア
     targetItems.clear();
+  }
+
+  if(message.type === 'emotionFlagChange'){
+    chrome.storage.local.get(["emoticonFlg"], function (result) {
+      if(Object.keys(result).length){
+        emotionFlag= result.emoticonFlg;
+      }else{
+        emotionFlag = false;
+      }
+    });
   }
 
   if(message.page === 'tweetDetail'){
@@ -81,7 +99,7 @@ const replayObsever = new MutationObserver( () => {
       }
     }
 
-    if(replayLength <= 0 && replayMessage === null && !tweetUserFlag && !helpFlag){
+    if(replayLength <= 0 && (replayMessage === null || emotionFlag) && !tweetUserFlag && !helpFlag){
       deleteReplay(replay);
       // console.log(replayMessage, replayLength)
       // console.log(replayMessage, replayLength, tweetUserFlag, helpFlag, userID)
