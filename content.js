@@ -1,4 +1,6 @@
 const TIMEOUT_DULATION = 300;
+const twitterHelpPagePattarn = /https:\/\/help\.twitter\.com\/.+/g;
+
 const targetItems = new Map();
 
 const LANGUAGE = (window.navigator.languages && window.navigator.languages[0]) ||
@@ -57,8 +59,7 @@ const replayObsever = new MutationObserver( () => {
   for(let index=1; index < articles.length; index++){ // 0は本体のツイート
     const replay = articles[index];
     
-    const userInfo = replay.querySelectorAll('div[data-testid="tweet"] span')
-    const userID = userInfo[userInfo.length - 1].textContent
+    const userID = replay.querySelectorAll('div[data-testid="tweet"] span')[2].textContent
 
     const tweetUserFlag = '@'+tweetUser === userID;
 
@@ -71,11 +72,21 @@ const replayObsever = new MutationObserver( () => {
       replayLength = replayMessage.length;
     }
 
-    if(replayLength <= 0 && replayMessage === null && !tweetUserFlag){
+    const aTags = replay.querySelectorAll('a[role="link"]');
+    let helpFlag = false;
+    for(const aTag of aTags){
+      if(aTag.href.match(twitterHelpPagePattarn) !== null){
+        helpFlag = true;
+        break;
+      }
+    }
+
+    if(replayLength <= 0 && replayMessage === null && !tweetUserFlag && !helpFlag){
       deleteReplay(replay);
       // console.log(replayMessage, replayLength)
+      // console.log(replayMessage, replayLength, tweetUserFlag, helpFlag, userID)
     }else{
-      // console.log(replayMessage, replayLength)
+      // console.log(replayMessage, replayLength, tweetUserFlag, helpFlag, userID)
     }
   }
 
