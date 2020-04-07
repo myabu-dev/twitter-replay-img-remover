@@ -7,7 +7,8 @@
     "matches": ["*://twitter.com/*"],
     "js": [
       "content.js"
-    ]
+    ],
+    "css": ["content.css"]
   }],
   "background": {
   "persistent": false,

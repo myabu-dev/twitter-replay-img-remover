@@ -11,9 +11,10 @@ function isJapanese(){
 }
   
 const Text = {
-  'showBtn' : isJapanese()? 'リプライを表示' : 'Show Replay',
-  'hideBtn' : isJapanese()? 'リプライを非表示' : 'Hide Replay'
+  'hideBtn' : isJapanese()? 'リプライを表示' : 'Show Replay',
+  'showBtn' : isJapanese()? 'リプライを非表示' : 'Hide Replay'
 }
+
 
 let tweetUser;
 
@@ -96,8 +97,9 @@ function deleteReplay(elm, btnElm=null){
   targetItems.set(tweet, true);
 
   btnElm.innerHTML = Text.hideBtn;
+  btnElm.className = 'remove-replay-button';
   btnElm.onclick = recoverReplay.bind(null, elm, btnElm);
-  elm.parentNode.append(btnElm);
+  elm.parentNode.insertBefore(btnElm, elm);
 
   elm.style.display = "none";
 }
