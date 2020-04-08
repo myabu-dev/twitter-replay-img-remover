@@ -5,7 +5,7 @@ This extension support English and Japanese.
 
 ## Download
 - chrome
-  - https://chrome.google.com/webstore/detail/jmfldfgmaacgobmhonnidgdecmikccge/publish-accepted?authuser=0&hl=ja
+  - https://chrome.google.com/webstore/detail/twitter-replay-image-and/jmfldfgmaacgobmhonnidgdecmikccge
   
 - Fierfox
   - English https://addons.mozilla.org/en-US/firefox/addon/twitter-replay-img-gif-remover/
