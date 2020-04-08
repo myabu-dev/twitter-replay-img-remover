@@ -8,7 +8,7 @@ function isJapanese(){
 }
   
 const Text = {
-  'emoticonLabel' : isJapanese()? '顔文字だけのリプライを隠す' : 'Hide reply only use emoticon'
+  'emoticonLabel' : isJapanese()? '顔文字だけのリプライを隠す' : 'Hide reply only use emoji'
 }
 
 document.getElementById('toggle-emoticon-label').innerHTML = Text.emoticonLabel;
